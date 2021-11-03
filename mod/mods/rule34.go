@@ -10,24 +10,20 @@ import (
 	"github.com/cutest-design/hscraper/mod"
 )
 
-type cureninjapage struct {
-	Results []cureninjadata `json:"results"`
-}
-
-type cureninjadata struct {
-	ID   uint32 `json:"id,string"`
-	MD5  string `json:"md5"`
-	URL  string `json:"url"`
-	Tags string `json:"tags"`
-	Site string `json:"site"`
+type rule34data struct {
+	ID      uint32 `json:"id"`
+	FileURL string `json:"file_url"`
+	Hash    string `json:"hash"`
+	Score   int    `json:"score"`
+	Tags    string `json:"tags"`
 }
 
 func init() {
-	mod.Mods = append(mod.Mods, cureninja)
+	mod.Mods = append(mod.Mods, rule34)
 }
 
-func cureninja(c int, t string) []mod.Post {
-	req, err := http.NewRequest("GET", "https://cure.ninja/booru/api/json/"+strconv.Itoa(c)+"&q=tag:"+t, nil)
+func rule34(c int, t string) []mod.Post {
+	req, err := http.NewRequest("GET", "https://rule34.xxx/index.php?page=dapi&s=post&q=index&json=1&pid="+strconv.Itoa(c)+"&limit=100&tags="+t, nil)
 
 	if err != nil {
 		fmt.Println(err)
@@ -43,7 +39,7 @@ func cureninja(c int, t string) []mod.Post {
 		return nil
 	}
 
-	var resstruct cureninjapage
+	var resstruct []rule34data
 	err = json.NewDecoder(res.Body).Decode(&resstruct)
 
 	if err != nil {
@@ -54,16 +50,16 @@ func cureninja(c int, t string) []mod.Post {
 
 	var posts []mod.Post
 
-	for _, e := range resstruct.Results {
+	for _, e := range resstruct {
 		posts = append(posts, mod.Post{
 			ID:    e.ID,
-			Score: 0, // FUCK YOU
+			Score: int32(e.Score),
 			Tags: mod.Tags{
 				General: strings.Split(e.Tags, " "),
 			},
-			ImageURL: e.URL,
-			MD5:      e.MD5,
-			Module:   e.Site,
+			ImageURL: e.FileURL,
+			MD5:      e.Hash,
+			Module:   "rule34.xxx",
 		})
 	}
 
