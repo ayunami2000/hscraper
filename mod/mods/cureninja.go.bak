@@ -3,10 +3,11 @@ package mods
 import (
 	"encoding/json"
 	"fmt"
-	"h/mod"
 	"net/http"
 	"strconv"
 	"strings"
+
+	"github.com/cutest-design/hscraper/mod"
 )
 
 type cureninjapage struct {

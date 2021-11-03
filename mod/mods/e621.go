@@ -3,9 +3,10 @@ package mods
 import (
 	"encoding/json"
 	"fmt"
-	"h/mod"
 	"net/http"
 	"strconv"
+
+	"github.com/cutest-design/hscraper/mod"
 )
 
 type e621page struct {
