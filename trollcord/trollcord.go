@@ -58,9 +58,9 @@ func Tags(guild, category string) (map[string]string, error) {
 		tpc := strings.ReplaceAll(ch.Topic, "\n", "")
 
 		if !ch.NSFW {
-			tpc = "rating:s " + tpc
+			tpc = "rating:safe " + tpc
 		} else {
-			tpc = "rating:e " + tpc
+			tpc = "rating:explicit " + tpc
 		}
 
 		res[ch.ID] = tpc
