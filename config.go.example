@@ -1,0 +1,19 @@
+package main
+
+import (
+	"time"
+)
+
+// 	fmt.Sprintf(Template, post.ID, post.Score, post.Tags, post.MD5, post.Module, post.ImageURL),
+const Template = `[%[5]s] (%[1]d) %[6]s`
+const SleepTime = 1 * time.Minute
+
+const Guild = "000000000000000000"
+const Category = "000000000000000000"
+
+var Tokens = []string{
+	"bot tokens",
+	"go here",
+	"multiple aren't",
+	"required"
+}
