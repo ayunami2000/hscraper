@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	fmt.Printf("Failed to load %d tokens!\n", trollcord.LoadTokens(Tokens))
+	fmt.Printf("Failed to load %d tokens! (%d total)\n", trollcord.LoadTokens(Tokens), len(Tokens))
 	for {
 		tags, err := trollcord.Tags(Guild, Category)
 

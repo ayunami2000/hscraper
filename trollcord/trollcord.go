@@ -59,6 +59,8 @@ func Tags(guild, category string) (map[string]string, error) {
 
 		if !ch.NSFW {
 			tpc = "rating:s " + tpc
+		} else {
+			tpc = "rating:e " + tpc
 		}
 
 		res[ch.ID] = tpc
