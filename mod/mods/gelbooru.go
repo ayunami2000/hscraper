@@ -10,7 +10,7 @@ import (
 	"github.com/cutest-design/hscraper/mod"
 )
 
-type rule34data struct {
+type gelbooruDara struct {
 	ID      uint32 `json:"id"`
 	FileURL string `json:"file_url"`
 	Hash    string `json:"hash"`
@@ -19,10 +19,10 @@ type rule34data struct {
 }
 
 func init() {
-	mod.Mods = append(mod.Mods, rule34)
+	mod.Mods = append(mod.Mods, gelbooru)
 }
 
-func rule34(c int, t string) []mod.Post {
+func gelbooru(c int, t string) []mod.Post {
 	req, err := http.NewRequest("GET", "https://gelbooru.com/index.php?page=dapi&s=post&q=index&json=1&pid="+strconv.Itoa(c)+"&limit=100&tags="+t, nil)
 
 	if err != nil {
@@ -39,7 +39,7 @@ func rule34(c int, t string) []mod.Post {
 		return nil
 	}
 
-	var resstruct []rule34data
+	var resstruct []gelbooruDara
 	err = json.NewDecoder(res.Body).Decode(&resstruct)
 
 	if err != nil {
