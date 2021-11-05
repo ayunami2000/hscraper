@@ -10,7 +10,7 @@ import (
 	"github.com/cutest-design/hscraper/mod"
 )
 
-type gelbooruDara struct {
+type gelbooruData struct {
 	ID      uint32 `json:"id"`
 	FileURL string `json:"file_url"`
 	Hash    string `json:"hash"`
@@ -39,7 +39,7 @@ func gelbooru(c int, t string) []mod.Post {
 		return nil
 	}
 
-	var resstruct []gelbooruDara
+	var resstruct []gelbooruData
 	err = json.NewDecoder(res.Body).Decode(&resstruct)
 
 	if err != nil {
